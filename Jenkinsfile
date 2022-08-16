@@ -5,13 +5,13 @@ pipeline {
         stage('Build Jar') {
             steps {
                 //sh
-                bat "mvn clean package -DskipTests"
+                sh "mvn clean package -DskipTests"
             }
         }
         stage('Build Image') {
             steps {
                 //sh
-                bat "docker build -t='vinsdocker/selenium-docker' ."
+                sh "docker build -t='vinsdocker/selenium-docker' ."
             }
         }
         stage('Push Image') {
