@@ -4,22 +4,22 @@ pipeline {
     stages {
         stage('Build Jar') {
             steps {
-                //sh
+                //bash
                 sh "mvn clean package -DskipTests"
             }
         }
         stage('Build Image') {
             steps {
-                //sh
-                sh "docker build -t='vinsdocker/selenium-docker' ."
+                //bash
+                sh "docker build -t='amitdocker/selenium-docker' ."
             }
         }
         stage('Push Image') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'Amit@1234', usernameVariable: 'bhardwajamit')]) {
-                    //sh
+                    //bash
 			        sh "docker login --username=${user} --password=${pass}"
-			        sh "docker push vinsdocker/selenium-docker:latest"
+			        sh "docker push amitdocker/selenium-docker:latest"
 			    }
             }
         }
