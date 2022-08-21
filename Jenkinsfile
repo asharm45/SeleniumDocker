@@ -24,7 +24,7 @@ pipeline {
 			        // rename the image as per the dockerHub standard - by using tag [docker.io/userName/repositoryName]
 			        sh "docker image tag amitdocker/selenium-docker bhardwajamit/selenium-docker"
                     // remove the duplicate image
-			        sh "docker rm amitdocker/selenium-docker"
+			        //sh "docker rm amitdocker/selenium-docker"
 			        //push the image to dockerHub
 			        sh "docker image push bhardwajamit/selenium-docker:latest"
             }
