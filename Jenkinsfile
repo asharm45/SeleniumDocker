@@ -12,7 +12,7 @@ pipeline {
             steps {
                 //bat
                 sh "docker logout"
-                sh "docker build -t='amitdocker/selenium-docker' ."
+                sh "docker build -t amitdocker/selenium-docker ."
             }
         }
         stage('Push Image') {
