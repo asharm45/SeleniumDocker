@@ -1,33 +1,28 @@
 pipeline {
-    agent none
+    // master executor should be set to 0
+    agent any
     stages {
         stage('Build Jar') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /$HOME/.m2:/root/.m2'
-                }
-            }
             steps {
-                sh 'mvn clean package -DskipTests'
+                //bat
+                sh "mvn clean package -DskipTests"
             }
         }
         stage('Build Image') {
             steps {
-                script {
-                	app = docker.build("amitdocker/selenium-docker")
-                }
+                //bat
+                sh "docker build -t='amitdocker/selenium-docker' ."
             }
         }
         stage('Push Image') {
             steps {
-                script {
-			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-			        	app.push("${BUILD_NUMBER}")
-			            app.push("latest")
-			        }
-                }
+			        //bat
+			        sh "cat /Users/amitsharma/file-containing-access-token.txt"
+			        sh "docker login --username ${user} --password-stdin < /Users/amitsharma/file-containing-access-token.txt"
+			        sh "docker push amitdocker/selenium-docker:latest"
+			    }
             }
         }
     }
 }
+
