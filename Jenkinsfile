@@ -18,7 +18,7 @@ pipeline {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'user')]) {
                     //bat
-			        sh "ocker login --username ${user} --password-stdin < ~/file-containing-access-token.txt"
+			        sh "docker login --username ${user} --password-stdin < ~/file-containing-access-token.txt"
 			        sh "docker push amitdocker/selenium-docker:latest"
 			    }
             }
