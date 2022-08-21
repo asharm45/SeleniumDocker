@@ -11,6 +11,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 //bat
+                sh "docker logout"
                 sh "docker build -t='amitdocker/selenium-docker' ."
             }
         }
