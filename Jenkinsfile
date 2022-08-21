@@ -17,10 +17,11 @@ pipeline {
         stage('Push Image') {
             steps {
 			        //bat
-			        user = 'bhardwajamit'
+			        user = "bhardwajamit"
+			        echo user
 			        //sh "cat /Users/amitsharma/file-containing-access-token.txt"
-			        sh "docker login --username $user --password-stdin < /Users/amitsharma/file-containing-access-token.txt"
-			        sh "docker push amitdocker/selenium-docker:latest"
+			        //sh "docker login --username $user --password-stdin < /Users/amitsharma/file-containing-access-token.txt"
+			        //sh "docker push amitdocker/selenium-docker:latest"
             }
         }
     }
