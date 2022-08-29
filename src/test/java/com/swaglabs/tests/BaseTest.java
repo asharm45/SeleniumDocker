@@ -2,21 +2,22 @@ package com.swaglabs.tests;
 
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    protected static WebDriver driver;
 
-    @BeforeClass
+    @BeforeTest
     public void setup(ITestContext ctx) throws MalformedURLException {
 
         //Browser -> chrome / firefox
@@ -24,13 +25,13 @@ public class BaseTest {
 
         //Default value
         String host = "localhost";
-        MutableCapabilities dc;
+        MutableCapabilities mc;
 
         if(System.getProperty("BROWSER") != null &&
                 System.getProperty("BROWSER").equalsIgnoreCase("chrome")){
-            dc = new ChromeOptions();
+            mc = new ChromeOptions();
         }else{
-            dc = new FirefoxOptions();
+            mc = new FirefoxOptions();
         }
 
         if(System.getProperty("HUB_HOST") != null){
@@ -40,14 +41,7 @@ public class BaseTest {
         String testName = ctx.getCurrentXmlTest().getName();
 
         String completeUrl = "http://" + host + ":4444/wd/hub";
-        dc.setCapability("name", testName);
-        this.driver = new RemoteWebDriver(new URL(completeUrl), dc);
-
-        driver.get("https://www.saucedemo.com/");
-    }
-
-    @AfterClass
-    public void closeBrowser(){
-        driver.close();
+        mc.setCapability("name", testName);
+        this.driver = new RemoteWebDriver(new URL(completeUrl), mc);
     }
 }

@@ -10,12 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage{
 
-    private WebDriver driver;
     private WebDriverWait wait;
 
     public LoginPage(WebDriver driver){
+        super(driver);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver,this);
     }
@@ -29,10 +29,11 @@ public class LoginPage {
     @FindBy(how= How.ID, using=("login-button"))
     private WebElement loginBtn;
 
-    public void loginToApplication(String username, String password){
+    public ProductPage loginToApplication(String username, String password){
         this.wait.until(ExpectedConditions.visibilityOf(loginBtn));
         this.uname.sendKeys(username);
         this.pwd.sendKeys(password);
         this.loginBtn.click();
+        return new ProductPage(driver);
     }
 }

@@ -10,12 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CheckoutOverviewPage {
+public class CheckoutOverviewPage extends AbstractPage{
 
-    private WebDriver driver;
     private WebDriverWait wait;
 
     public CheckoutOverviewPage(WebDriver driver){
+        super(driver);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver,this);
     }
@@ -25,8 +25,9 @@ public class CheckoutOverviewPage {
     private WebElement finishBtn;
 
 
-    public void clickOnFinish(){
+    public CheckoutCompletePage clickOnFinish(){
         this.wait.until(ExpectedConditions.visibilityOf(finishBtn));
         this.finishBtn.click();
+        return new CheckoutCompletePage(driver);
     }
 }

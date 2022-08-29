@@ -10,12 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ProductPage {
+public class ProductPage extends AbstractPage{
 
-    private WebDriver driver;
     private WebDriverWait wait;
 
     public ProductPage(WebDriver driver){
+        super(driver);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver,this);
     }
@@ -32,8 +32,9 @@ public class ProductPage {
         return this;
     }
 
-    public void clickOnCart(){
+    public CartPage clickOnCart(){
         this.wait.until(ExpectedConditions.visibilityOf(cart));
         this.cart.click();
+        return new CartPage(driver);
     }
 }

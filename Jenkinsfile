@@ -14,7 +14,7 @@ pipeline {
                 // logout from dockerHub
                 sh "docker logout"
                 // build the image
-                sh "docker build -t='amitdocker/selenium-docker' ."
+                sh "docker build -t='amitsharma/docker-selenium' ."
             }
         }
         stage('Push Image') {
@@ -22,11 +22,11 @@ pipeline {
 			        // login to dockerHub with access token
 			        sh "docker login --username bhardwajamit --password-stdin < /Users/amitsharma/file-containing-access-token.txt"
 			        // rename the image as per the dockerHub standard - by using tag [docker.io/userName/repositoryName]
-			        sh "docker image tag amitdocker/selenium-docker bhardwajamit/selenium-docker"
+			        sh "docker image tag amitsharma/docker-selenium amit/selenium-docker"
                     // remove the duplicate image
 			        //sh "docker rm amitdocker/selenium-docker"
 			        //push the image to dockerHub
-			        sh "docker image push bhardwajamit/selenium-docker:latest"
+			        sh "docker image push amit/selenium-docker:latest"
             }
         }
     }
