@@ -1,9 +1,6 @@
 pipeline {
     // master executor should be set to 0
     agent any
-    tools{
-        jdk "java8"
-    }
     stages {
         stage('Build Jar') {
             steps {
