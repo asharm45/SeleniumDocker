@@ -23,5 +23,6 @@ public class PlaceOrder extends BaseTest{
                  .validateMessage()
                  .clickOnMenu()
                  .clickOnLogoutBtn();
+
     }
 }
